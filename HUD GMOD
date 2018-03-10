@@ -1,0 +1,30 @@
+surface.CreateFont( "vie", {
+	font = "Arial", 
+	size = 20,
+	weight = 500,
+	blursize = 0,
+	scanlines = 0,
+	antialias = true,
+	underline = false,
+	italic = false,
+	strikeout = false,
+	symbol = false,
+	rotary = false,
+	shadow = false,
+	additive = false,
+	outline = false,
+} )
+
+hook.Add("HUDPaint", "hudryan", function()
+local health = LocalPlayer() :Health()
+draw.RoundedBox(4, 10, ScrH() -20, 300, 14, Color(0,0,0,255))
+draw.RoundedBox(4, 10, ScrH() -20, health * 3, 14, Color(189,24,24,255))
+draw.SimpleText(health, "vie", 150, ScrH() - 21, Color(255,255,255))
+end)
+
+-- Retirer le HUD de base
+hook.Add( "HUDShouldDraw", "DefautHUD", function( name ) 
+	if ( name == "CHudHealth" or name == "CHudBattery" ) 
+		then return false 
+	end 
+end )
